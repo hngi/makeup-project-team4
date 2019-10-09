@@ -42,18 +42,19 @@ if (isset($_POST['submit'])) {
 
 ?>
 <html>
-<head>
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Forgot Password</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/index.css">
+        <meta name="theme-color" content="#333"/>
+        <link rel="manifest" href="/manifest.json"/>  
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-        <!--<link rel="stylesheet" href="./css/style.css">-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
+        <link rel="stylesheet" href="newcss.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Forgot Password</title>
+        <!--- <style>
         body {
             font-family: Nunito, sans-serif;
         }
@@ -72,27 +73,61 @@ if (isset($_POST['submit'])) {
             border: none;
             outline: 0;
         }
-        </style>
-</head>
-<section>
-    <div class="container">
-            <div class="row">
-              <div class="col-sm col-md-4">
-              </div>
-              <div class="col-sm col-md-4">
-                    <div class="form-group" >
-                            <form action="forgotpassword.php" method="POST"><br>
+        </style> --->
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #32465a;">
+            <a class="navbar-brand" href="#"><img
+				src="https://res.cloudinary.com/angelae/image/upload/v1569493481/Start-ng-Pre-internship/n2mmwn3pvnbjuaqjjkj3.png"
+				alt="Logo"
+				style="width: 63px; height: 63px; padding: 10px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="index.html#about-us">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="content.html#why-spendless">Why SpendLess?</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="content.html#how-it-works">How it Works</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="content.html#support">Support</a>
+                </li>
+                <a href="login.php" class="nav-item py-md-3 px-4 btn btn-outline-warning">LOG IN</a>
+
+              </ul>
+              
+            </div>
+        </nav>
+          
+
+        <section class="signup">
+            <div class="container h-100">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12" >
+                            <form class="formSize" action="forgotpassword.php" method="POST" name="ForgotPasswordForm"><br>
                                 <label>Please enter your registered email address</label>
-                                <input class ="email-input remove-glow border-black rounded form-control pl-3" type="email" placeholder="Email address" name="email" >
+                                <input class ="form-control" type="email" placeholder="Enter Email" name="email" id="inputEmail">
                                     <br>
-                                <button class="btn btn-success button" type="submit" value="Send" name="submit">Send</button>
+                                <button class="btn btn-outline-warning btn-lg btn-block" type="submit" value="Send" name="submit">Send</button>
                             </form>
                         </div>
                         <p><?php echo $msg ?></p>
-              </div>
-              <div class="col-sm col-md-4">
-              </div>
+                    </div>
+                    <div class="form-group col-12">
+                    </div>
+                </div>
             </div>
-          </div>
-</section>
+        </section>
+    </body>
 </html>

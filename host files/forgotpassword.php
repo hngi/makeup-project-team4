@@ -110,24 +110,33 @@ if (isset($_POST['submit'])) {
 
         <section class="signup">
             <div class="container h-100">
-                <div class="form-row">
-                    <div class="form-group col-12">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-12" >
-                            <form class="formSize" action="forgotpassword.php" method="POST" name="ForgotPasswordForm"><br>
-                                <label>Please enter your registered email address</label>
-                                <input class ="form-control" type="email" placeholder="Enter Email" name="email" id="inputEmail">
-                                    <br>
-                                <button class="btn btn-outline-warning btn-lg btn-block" type="submit" value="Send" name="submit">Send</button>
-                            </form>
+                <div class="signup-content">
+                    <form class="formSize" action="forgotpassword.php" method="POST" name="ForgotPasswordForm">
+                        <div class="formHeader col-12">Forgot Password?</div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label>Please enter the email address registered to your account.</label>
+                                    <input class ="form-control" type="email" placeholder="Enter Email" name="email" id="inputEmail">
+                                    <div class="errorMessage" id="email_error"></div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <button class="btn btn-outline-warning btn-lg btn-block" type="submit" value="Send" name="submit">Send</button>
+                                </div>
+                            </div>
                         </div>
-                        <p><?php echo $msg ?></p>
-                    </div>
-                    <div class="form-group col-12">
-                    </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <p><?php echo $msg ?></p>
                 </div>
             </div>
         </section>
+
+        <footer class="footer">
+            <div class="footerText"> Team Ganymede - HNGi6 &copy; 2019.  <a href="#"><i class="fa fa-angle-double-up fa-2x"></i></a></div>
+        </footer>
     </body>
 </html>

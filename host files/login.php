@@ -137,6 +137,7 @@ if (isset($_POST["submit"]) && $_POST['email'] && !empty($_POST['email']) && $_P
                                     <button type="submit" name='submit' class="btn btn-outline-warning btn-lg btn-block ">Sign In</button>
                                 </div>
                             </div>
+                            <p>Forgot password? Click <a href="forgotpassword.php">here</a></p>
                         </form>
                         
                     </div>

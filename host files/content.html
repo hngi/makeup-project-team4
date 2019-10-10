@@ -12,34 +12,59 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <title>Homepage Content</title>
+      <style>
+        nav{
+          font-size: 22px;
+          border-top: none;
+        }
+      </style>
   </head>
   <body>
-      <nav>
-          <figure>
-            <img
-                      src="https://res.cloudinary.com/angelae/image/upload/v1569493481/Start-ng-Pre-internship/n2mmwn3pvnbjuaqjjkj3.png"
-                      alt="Logo"
-                      style="width: 63px; height: 63px; padding: 10px;"
-                  />
-          </figure>
-          <!--<div class="big-nav hidden">-->
-              <div class="home-page">
-                <a href="index.html"><button type="button" class="btn">Home Page</button></a>
-              </div>
+      <nav class="flex fixed-top">
+        <figure>
+          <img
+            src="https://res.cloudinary.com/angelae/image/upload/v1569493481/Start-ng-Pre-internship/n2mmwn3pvnbjuaqjjkj3.png"
+            alt="Logo"
+            style="width: 63px; height: 63px; padding: 10px;"
+          />
+        </figure>
+        <div class="big-nav hidden">
+          <ul>
+            <a href="index.html" class="toplinks"><li>Home</li></a>
+            <a href="content.html#why-spendless" class="toplinks"><li>Why SpendLess?</li></a>
+            <a href="content.html#how-it-works" class="toplinks"><li>How it works</li></a>
+            <a href="content.html#support" class="toplinks"><li>Support</li></a>
+            <a href="faq.html" class="toplinks"><li>Faq</li></a>
+            <a href="content.html#about-us" class="toplinks"><li>About Us</li></a>
+           </ul>
+          <div>
+            <a href="signup.php" class="toplinks-signup" data-target="#signup">SIGN UP/LOG IN</a>
+          </div>
           
-          
-         <!-- <div class="small-nav hidden">
-              <a href="index.html">Home Page</a>-->
-          
-      </nav><br>
+        </div>
+        <i class="fa fa-bars"></i>
+        <div class="small-nav hidden">
+          <ul>
+            <a href="index.html" class="toplinks"><li>Home</li></a>
+            <a href="content.html#why-spendless" class="toplinks"><li>Why SpendLess?</li></a>
+            <a href="content.html#how-it-works" class="toplinks"><li>How it works</li></a>
+            <a href="content.html#support" class="toplinks"><li>Support</li></a>
+            <a href="faq.html" class="toplinks"><li>Faq</li></a>
+            <a href="content.html#about-us" class="toplinks"><li>About Us</li></a>
+          </ul>
+  
+  
+          <a href="signup.php" class="toplinks-signup">SIGN UP / LOGIN</a>
+        </div>
+      </nav> 
       <section class="main-container">
   
       <div class="container-fluid content">
-          <div id="why-spendless" class="content__spendless row">
-            <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 pr-0" id="spendless-img-container">
+          <div id="why-spendless" class="content__spendless row"> 
+            <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 pr-0" id="spendless-img-container"> <br> <br> <br>
              <img class="img-fluid spendless-img ml--5" src="https://res.cloudinary.com/nkechi-christabel/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_500,w_600/v1570050116/ziwtrsdylc1xez5cfkrr.jpg" alt="A lady calculating">
             </div>
-            <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 pl-0 spendless__text" id="spendless">
+            <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 pl-0 spendless__text" id="spendless"> <br> <br> <br>
               <h3><span>Why</span> SpendLess?</h3>
               <p>
                   We calculate your average spending by category, so you can easily create a budget based on spending patterns. This enables you to see how much you are spending on what, on a daily basis or month-to-month.
@@ -61,7 +86,7 @@
   
           <div class="container-fluid">
             <div id="how-it-works" class="content__how-it-works row">
-              <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 how-it-works__text mx-auto">
+              <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6 how-it-works__text mx-auto"> <br> <br>
                 <h3>How it works</h3>
               <p>
                   SpendLess uses budget categories to help you track your spending. It shows you the summary of your expenditures, how much you've saved based on each category and expenses you have made on each category.
@@ -71,7 +96,7 @@
                   SpendLess track all your bills on the go from credit card, utility bills, data top-up and your insurance. It’s all in one place and easy to manage, reminds you when to carry out a transaction and gives you alerts if funds are low.
               </p>
               </div>
-              <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6"  id="how-it-works-img-container">
+              <div class="col-xm-8 col-sm-8 col-md-6 col-lg-6"  id="how-it-works-img-container"> <br> <br>
                   <img class="img-fluid how-it-works-img" src="https://res.cloudinary.com/nkechi-christabel/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_450,w_600/v1570050617/mwhypr1pac7pa8ahzivz.jpg" alt="Two women talking">
                 </div>
             </div>
@@ -80,7 +105,7 @@
   
       <div class="container-fluid">
         <div id="support" class="content__support row">
-            <div class="col-xm-8 col-sm-8 col-md-7 col-lg-7 mx-auto">
+            <div class="col-xm-8 col-sm-8 col-md-7 col-lg-7 mx-auto"> <br> <br>
           <h3>Support</h3>
           <h5>Login Authentication</h5>
           <ol>
@@ -104,7 +129,7 @@
               </li>  
           </ol>
           </div>
-          <div class="col-xm-8 col-sm-8 col-md-5 col-lg-5 mx-auto" id="support-img-container">
+          <div class="col-xm-8 col-sm-8 col-md-5 col-lg-5 mx-auto" id="support-img-container"> <br> <br>
             <img class="img-fluid support-img" src="https://res.cloudinary.com/nkechi-christabel/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_367,w_556/v1570133626/ebbqpnwztpiwxdlcnhuk.png" alt="Lady on the phone">
           </div>
           </div>

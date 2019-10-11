@@ -82,8 +82,8 @@ if (isset($_POST["submit"]) && $_POST['email'] && !empty($_POST['email']) && $_P
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                  <a class="nav-link py-md-3 px-4" href="index.html#about-us">About Us</a>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link py-md-3 px-4" href="content.html#why-spendless">Why SpendLess?</a>
@@ -93,6 +93,12 @@ if (isset($_POST["submit"]) && $_POST['email'] && !empty($_POST['email']) && $_P
                 </li>
                 <li class="nav-item">
                   <a class="nav-link py-md-3 px-4" href="content.html#support">Support</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="faq.html">FAQ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link py-md-3 px-4" href="index.html#about-us">About Us</a>
                 </li>
                 <a href="signup.php" class="nav-item py-md-3 px-4 btn btn-outline-warning">GET STARTED</a>
 

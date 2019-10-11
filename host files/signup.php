@@ -203,7 +203,7 @@ if (isset($_POST['submit'])) {
                     <div cs="row h-100 justify-content-center align-items-center" class="signup-content">
                         
                         <form class="formSize" method="POST" action="signup.php" onsubmit="return Validate()" name="signupForm">
-                          <h4 id="error"><?php echo $error; ?></h4>
+                          
                                 <div class="formHeader col-12">Welcome </div>
                             <div class="form-row">
                               <div class="form-group col-12">

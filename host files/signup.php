@@ -255,19 +255,6 @@ if (isset($_POST['submit'])) {
                         
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <button type="submit" class="btn btn-outline-warning btn-lg btn-block " name="submit">Sign Up</button>
-                    </div>
-                </div>
-
-                <?php if (isset($errors)) {
-                    var_dump($errors);
-                } ?>
-            </form>
-
-        </div>
-    </div>
 </section>
 
 

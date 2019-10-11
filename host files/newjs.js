@@ -26,7 +26,7 @@ function Validate() {
     return false;
   }
   //validate name is longer than 2
-  if (fname.value.length <= 8) {
+  if (fname.value.length < 8) {
     fname.style.border = "2px solid red";
     document.getElementById('inputName').style.color = "red";
     name_error.textContent = "Name must be at least 8 characters";

@@ -197,7 +197,7 @@ if (isset($_POST['submit'])) {
         <div cs="row h-100 justify-content-center align-items-center" class="signup-content">
 
             <form class="formSize" method="POST" action="signup.php" onsubmit="return Validate()" name="signupForm">
-                <h4 id="error">error message here </h4>
+<!--                <h4 id="error">error message here </h4>-->
                 <div class="formHeader col-12">Welcome </div>
                 <div class="form-row">
                     <div class="form-group col-12">
@@ -246,9 +246,9 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-                <?php if (isset($errors)) {
-                    var_dump($errors);
-                } ?>
+<!--                --><?php //if (isset($errors)) {
+//                    var_dump($errors);
+//                } ?>
             </form>
 
         </div>

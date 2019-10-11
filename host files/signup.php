@@ -1,119 +1,77 @@
 <?php
 include 'connect.php';
-//create variable for error
+$errorMsg = '';
+$error = '';
+$success = "";
 
-function sanitize($input){
-    global $conn;
-    $input = htmlentities(strip_tags(trim($input)));
-    $input = mysqli_real_escape_string($conn, $input);
-    return $input;
+
+
+if(isset($_POST['register'])) {
+
+	$name = mysqli_real_escape_string($conn, $_POST["name"]);
+	$username = mysqli_real_escape_string($conn, $_POST["username"]);
+	$email = mysqli_real_escape_string($conn, $_POST["email"]);
+  $password = mysqli_real_escape_string($conn, $_POST["pwd"]);
+  $cpassword = mysqli_real_escape_string($conn, $_POST["cpwd"]);
+    if (empty($_POST['name'])) {
+         $error = "name required  <br/>";
+    }
+
+    if (empty($_POST['username'])) {
+        $error = "username required  <br/>";
+    }  
+
+    if (empty($_POST['email'])) {
+         $error = "email is required  <br/>";
+    } else {
+        $email = $_POST['email'];
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "email must be valid address  <br/>";
+        }  
+		}
+
+    if (empty($_POST['pwd'])) {
+         $error = " password required ";
+         
+    } 
+
+    if($password != $cpassword) {
+        $error = "password does not match  <br/>";
+    }      
+	
+
+			//check if account exist
+			$query = "SELECT * FROM users WHERE email = '$email'";
+			$query_result = mysqli_query($conn, $query);
+			$count = mysqli_num_rows($query_result);
+
+			if ($count > 0) {
+				$error = "This email address already exists. Switch tab to log in";
+			}
+
+			
+			if(empty($error)) {
+					$password = password_hash($password, PASSWORD_DEFAULT);
+				$sql = "INSERT INTO users(name,username, password_hash, email) VALUES('$name','$username','$password', '$email')";
+				$add_user = mysqli_query($conn, $sql);
+        $_SESSION['mgs'] = "Registration Successful..";
+        header('location: login.php');
+				
+		} 
+		
+	
 }
 
-if (isset($_POST['submit'])) {
-    $errors = [];
 
-    extract($_POST);
-
-    if (!empty($fname)){
-        if (preg_match('/^[a-z ]{8,}$/i', $fname)){
-            $fname = sanitize($fname);
-        } else {
-            $errors[] = "Full name must be a minimum of 8 characters";
-        }
-    } else {
-        $errors[] = "Please enter your full name";
-    }
-
-    if (!empty($username)){
-        if (preg_match('/[a-z]{4,}/i', $username)){
-            $username = sanitize($username);
-        } else {
-            $errors[] = "Username must contain a minimum of 4 characters.";
-        }
-    } else {
-        $errors[] = "Please enter your username";
-    }
-
-    if (!empty($password)){
-        if (preg_match('/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z0-9]){6,40}/', $password)){
-            $password = sanitize($password);
-        } else{
-            $errors[] = "Password must contain a minimum of 6 characters with at least one lower case, upper case and one digit.";
-        }
-    } else {
-        $errors[] = "Enter your password";
-    }
-
-    if (!empty($confirmPassword)){
-        if (preg_match('/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z0-9]){6,40}/', $confirmPassword)){
-            $confirmPassword = sanitize($confirmPassword);
-        } else{
-            $errors[] = "Confirm password must also contain a minimum of 6 characters with at least one lower case, upper case and one digit.";
-        }
-    } else {
-        $errors[] = "Confirm your password.";
-    }
-
-    if (isset($password) && isset($confirmPassword)) {
-        if ($password === $confirmPassword) {
-            $password = md5($password);
-        } else {
-            $errors[] = "Passwords entered mis-matched";
-        }
-    }
-
-    if (!empty($email)) {
-        $email_tmp = filter_var($email, FILTER_VALIDATE_EMAIL);
-        if ($email_tmp) {
-            $email = sanitize($email_tmp);
-        } else {
-            $errors[] = "Invalid email address";
-        }
-    } else {
-        $errors[] = "Please enter your email";
-    }
-
-    if (!$errors) {
-        $query = "SELECT * FROM user WHERE email = '$email'";
-
-        $result = mysqli_query($conn, $query);
-        if ($result && mysqli_num_rows($result) > 0) {
-            $errors[] = "Can't recreate an existing account. Log in";
-        } else {
-            $hash_code = md5(rand(1, 1000));
-            $active = 'no';
-
-            $query = "INSERT INTO user (username, password_hash, email) VALUES ('$username','$password', '$email')";
-
-            $result = mysqli_query($conn, $query);
-
-            if ($result) {
-                //send verification email
-                $from = "noreply@spendless-hng.com";
-                $to = $email;
-                $subject = 'Sign Up Verification';
-                $message = "Thanks for signing up with SpendLess \n \n
-                Please click on the link to verify your account: \n
-                https://spendless-hng.000webhostapp.com/verification.php?email=$email&hash=$hash_code";
-                //send_mail
-                $sent = mail($to, $subject, $message, "From: $from");
-                if($sent) {
-                    header("Location: goverify.html");
-                    exit();
-                } else {
-                    $errors[] = "Couldn't send verification link to your email";
-                }
-            } else {
-                $errors[] = "Data entry failed!" . mysqli_error($conn);
-            }
+    
+            
+ ?>
 
 
-        }
-    }
 
-}
 
-?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -203,7 +161,11 @@ if (isset($_POST['submit'])) {
                     <div cs="row h-100 justify-content-center align-items-center" class="signup-content">
                         
                         <form class="formSize" method="POST" action="signup.php" onsubmit="return Validate()" name="signupForm">
-                          
+                        <?php
+						if($error) {
+              echo "<p class='text-danger text-center'>$error</p>";
+            }
+						?>
                                 <div class="formHeader col-12">Welcome </div>
                             <div class="form-row">
                               <div class="form-group col-12">

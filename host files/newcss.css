@@ -16,7 +16,7 @@ section{
     background-color: #ddb903 !important;
     width: 100%;
     margin-bottom: 5%;
-    height: 50px;
+    /* height: 50px; */
     font-size: 30px;
     font-weight: bold;
     text-align: center;
@@ -64,7 +64,7 @@ section{
     background-color: #ddb903 !important;
     width: 100%;
     margin-bottom: 5%;
-    height: 50px;
+    /* height: 50px; */
     font-size: 30px;
     font-weight: bold;
     text-align: center;

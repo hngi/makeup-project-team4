@@ -1,12 +1,15 @@
 <?php
 
-session_start();
+
 ob_start();
 
 include 'connect.php';
+if (!$_SESSION['email']) {
+    header('LOCATION: index.html');
+}
 
-$username = $_SESSION['name'];
-$usersql = "SELECT * FROM users WHERE username='$username'";
+$email = $_SESSION['email'];
+$usersql = "SELECT * FROM users WHERE email ='$email'";
 $query = mysqli_query($conn, $usersql);
 
 if(mysqli_num_rows($query) > 0){
@@ -205,11 +208,19 @@ if(isset($_POST['submit'])){
             <a href="" class="toplinks">Resources</a>
             <a href="" class="toplinks">How it Works</a>
             <a href="" class="toplinks">Support</a>
-            <a href="">LOG OUT</a>
+            <a href="logout.php">LOG OUT</a>
         </div>
     </nav>
     
     <section>
+    <?php if(isset($_SESSION['mgs'])):?>
+			<div class='alert alert-success'>
+				<?php
+						echo $_SESSION['mgs'];
+						unset($_SESSION['mgs']);
+						?>
+			</div>
+					<?php endif;?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-4"><br>

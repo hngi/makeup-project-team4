@@ -83,6 +83,14 @@ function Validate() {
     password.focus();
     return false;
   }
+  if (password.value.length <= 6) {
+    password.style.border = "2px solid red";
+    document.getElementById('inputPassword').style.color = "red";
+    password_confirm.style.border = "1px solid red";
+    password_error.textContent = "Password must be at least 6 characters";
+    password.focus();
+    return false;
+  }
   // check if the two passwords match
   if (password.value !== password_confirm.value) {
     password.style.border = "1px solid red";
@@ -118,7 +126,7 @@ function emailVerify() {
   }
 }
 function passwordVerify() {
-  if (password.value !== "") {
+  if ((password.value !== "") && (password.value.length <= 6)) {
     password.style.border = "1px solid #5e6e66";
     document.getElementById('confirmPassword').style.color = "#46B32A";
     document.getElementById('inputPassword').style.color = "#46B32A";

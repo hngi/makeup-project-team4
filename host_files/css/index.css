@@ -27,7 +27,7 @@ a {
 section.banner {
     background: rgba(0, 0, 0, 0.7);
     position: relative;
-    min-height: 85vh;
+    min-height: 115vh;
 }
 section.banner::after {
     content: "";
@@ -268,10 +268,5 @@ footer a {
 .index-sign-up:hover{
     background-color: #CE6713;
 
-div.container-fluid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-r
+
 }

@@ -1,41 +1,55 @@
 <?php 
 require 'connect.php';
 $errorMsg = "";
-$errors = [];
-$success = "";
 
-
-
-
-
-if(isset($_POST["login"])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $username = '';
-
-        if(count($errors) === 0) {
-					
-          $query = "SELECT * FROM users WHERE email = '$email'";
-					$query_result = mysqli_query($conn, $query);
-					$user = mysqli_fetch_array($query_result);
-					$count = mysqli_num_rows($query_result);
-
-					if (password_verify($password, $user['password_hash'])) {
-						$_SESSION['email'] = $user['email'];
-						$_SESSION['mgs'] = 'You are logged in';
-						header("location: userpage.php");
-					}else {
-						$errors['login-error'] = 'invalid credential';
-					}
-               
-
-        }        
-        
-}
+if (isset($_POST["submit"]) && $_POST['email'] && !empty($_POST['email']) && $_POST['password'] && !empty($_POST['password'])) {
     
+    //store input in variables.
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    // echo $email;
+    // echo $password;
+    // //$username = '';
+    
+    $query = "SELECT * FROM users WHERE email= '$email' AND user_password = '$password'";
+    $result = mysqli_query($conn, $query)
+    or die(mysqli_error($conn));
+    if ($result && mysqli_num_rows($result) > 0) {
+         $user_row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+          foreach ($user_row as $det) {
+               if ($det['active'] == 'no') {
+            $errorMsg = "Please activate your account";
+          } else {
+        
+        session_start();
+         $_SESSION['name'] = $det['username'];
+        $_SESSION['email'] = $det['email'];
+        
+        header("Location: userpage.php");
             
- ?>
+        
+        
+        
+        
+        
+                  
+              }
+          }
+         
+    } else {
+        $errorMsg = "Email or Password is incorrect";
+        
+    } 
+       
+    }
+    
+   
+    
+    
 
+
+        
+?>
 
 
 
@@ -100,24 +114,7 @@ if(isset($_POST["login"])) {
                     <div class="signup-content">
                         
                         <form class="formSize" method="POST" action="login.php" name="LoginForm">
-                        <?php if(isset($_SESSION['mgs'])):?>
-                            <div class='alert alert-success'>
-                              <?php
-                                  echo $_SESSION['mgs'];
-                                  unset($_SESSION['mgs']);
-                              ?>
-                            </div>
-                              <?php endif;?>
-                          
-                              <?php if(count($errors) > 0):?>
-                          <div >
-                            <?php
-                                foreach ($errors as $error) {
-                                  echo "<p class='text-danger text-center'>$error</p>";
-                                }
-                                ?>
-                          </div>
-                              <?php endif;?>
+                            <h4><?php echo $errorMsg; ?></h4>
                                 <div class="formHeader col-12">Welcome </div>
                            
                             <div class="form-row">
@@ -145,8 +142,10 @@ if(isset($_POST["login"])) {
                                 <div class="form-group col-12">
                                     <button type="submit" name='submit' class="btn btn-outline-warning btn-lg btn-block ">Sign In</button>
                                 </div>
+                                <div>
+                                    <p>Forgot password? Click <a href="forgotpassword.php">here</a></p>
+                                </div>
                             </div>
-                            <p>Forgot password? Click <a href="forgotpassword.php">here</a></p>
                         </form>
                         
                     </div>

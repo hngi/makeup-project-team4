@@ -1,0 +1,93 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-image: linear-gradient(to left bottom,
+    rgba(220,220,220, 0.8),
+     rgba(255,255,255, 0.8)), url('https://res.cloudinary.com/nkechi-christabel/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1570225268/tczkvgplkycsbwfamr5v.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+section{
+    height: 80vh;
+}
+
+.email-container {
+  /* height: 80vh; */
+  text-align: center;
+  margin-top: 1%;
+}
+
+/* div.container-left {
+    margin: 0 0 0 -55%;
+   
+}
+
+div.container-left h1 {
+    font-size: 60px;
+    letter-spacing: .2rem;
+    line-height: 6rem;
+    color: #1d1e22;
+    animation-name: fadeInOut;
+    animation-duration: 9s;
+   
+}
+
+div.container-left p {
+font-size: 25px;
+letter-spacing: .1rem;
+line-height: 3rem;
+color:  #1d1e22; 
+animation-name: fadeInOut;
+animation-duration: 9s;
+}
+
+div.container-left .btn {
+    font-size: 22px; 	
+    color: #fff;
+    background-color: #FF4500;
+    padding: .6rem;
+    width: 50%;
+    animation-name: fadeInOut;
+    animation-duration: 9s;
+    border-radius: 10px;
+}
+
+div.container-left .btn:hover {
+    color: #050A30;
+    background-color: #e25822; 	
+}
+
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+   */
+
+@media only screen and (max-width: 892px) {
+    div.container-left {
+        margin: 0 0 0 -40%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    div.container-left {
+        margin: 0 0 0 -30%;
+    } 
+}
+
+@media only screen and (max-width: 640px) {
+    div.container-left {
+        margin: 0;
+    }
+}

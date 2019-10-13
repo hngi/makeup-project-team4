@@ -1,9 +1,9 @@
 <?php
 //database connection
 $db_host = "localhost";
-$db_user = "ganymede";
-$db_password = "ganyMede20!9";
-$db_name = "ganymede_budget_app";
+$db_user = "id11029219_ganymede";
+$db_password = "ganymede2019";
+$db_name = "id11029219_ganymede_budget_app";
 
 
 $conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);

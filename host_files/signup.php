@@ -1,85 +1,59 @@
-<?php
+<?php 
 include 'connect.php';
-$errorMsg = '';
+//create variable for error
 $error = '';
-$success = "";
 
+if (isset($_POST['submit'])) {
+    if ($_POST['password'] == $_POST['confirmPassword']) {
+    $name = mysqli_real_escape_string($conn, $_POST["fname"]);
+    $username = mysqli_real_escape_string($conn, $_POST["username"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
 
-
-if(isset($_POST['register'])) {
-
-	$name = mysqli_real_escape_string($conn, $_POST["name"]);
-	$username = mysqli_real_escape_string($conn, $_POST["username"]);
-	$email = mysqli_real_escape_string($conn, $_POST["email"]);
-  $password = mysqli_real_escape_string($conn, $_POST["pwd"]);
-  $cpassword = mysqli_real_escape_string($conn, $_POST["cpwd"]);
-    if (empty($_POST['name'])) {
-         $error = "name required  <br/>";
-    }
-
-    if (empty($_POST['username'])) {
-        $error = "username required  <br/>";
-    }  
-
-    if (empty($_POST['email'])) {
-         $error = "email is required  <br/>";
+    $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($conn, $query)
+    or die("Error connecting db");
+    if ($result && mysqli_num_rows($result) > 0) {
+        $error = "Can't recreate an existing account. Log in";
     } else {
-        $email = $_POST['email'];
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = "email must be valid address  <br/>";
-        }  
-		}
-
-    if (empty($_POST['pwd'])) {
-         $error = " password required ";
-         
-    } 
-
-    if($password != $cpassword) {
-        $error = "password does not match  <br/>";
-    }      
-	
-
-			//check if account exist
-			$query = "SELECT * FROM users WHERE email = '$email'";
-			$query_result = mysqli_query($conn, $query);
-			$count = mysqli_num_rows($query_result);
-
-			if ($count > 0) {
-				$error = "This email address already exists. Switch tab to log in";
-			}
-
-			
-			if(empty($error)) {
-					$password = password_hash($password, PASSWORD_DEFAULT);
-				$sql = "INSERT INTO users(name,username, password_hash, email) VALUES('$name','$username','$password', '$email')";
-				$add_user = mysqli_query($conn, $sql);
-        $_SESSION['mgs'] = "Registration Successful..";
-        header('location: login.php');
-				
-		} 
-		
-	
+        $hash_code = md5(rand(1, 1000));
+        $active = 'no';
+        $query = "INSERT INTO users(username, user_password, email, hash_code, active) VALUES('$username','$password', '$email', '$hash_code', '$active' )";
+        $result = mysqli_query($conn, $query)
+        or die('Error entering user');
+        
+        //send verification email
+        $from = "noreply@spendless-hng.com";
+        $to = $email;
+        $subject = 'Sign Up Verification';
+        $message = "Thanks for signing up with SpendLess \n \n
+        Please click on the link to verify your account: \n
+        https://spendless-hng.000webhostapp.com/verification.php?email=$email&hash=$hash_code";
+        //send mail
+        $sent = mail($to, $subject, $message, "From: $from");
+        if($sent) {
+            header("Location: goverify.html"); 
+        } else {
+            $error = "Couldn't send verification link to your email";
+        }
+       
+        
+    }
+    
+    }
+    
 }
 
-
-    
-            
- ?>
-
-
-
-
-
+?>
 
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#333" />
-    <link rel="manifest" href="/manifest.json" />
+		<link rel="manifest" href="/manifest.json" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -161,11 +135,7 @@ if(isset($_POST['register'])) {
                     <div cs="row h-100 justify-content-center align-items-center" class="signup-content">
                         
                         <form class="formSize" method="POST" action="signup.php" onsubmit="return Validate()" name="signupForm">
-                        <?php
-						if($error) {
-              echo "<p class='text-danger text-center'>$error</p>";
-            }
-						?>
+                          <h4 id="error"><?php echo $error; ?></h4>
                                 <div class="formHeader col-12">Welcome </div>
                             <div class="form-row">
                               <div class="form-group col-12">
@@ -217,26 +187,25 @@ if(isset($_POST['register'])) {
                         
                     </div>
                 </div>
-</section>
+            </section>
+    
+       
+               
+                 
+        <footer class="footer">
+                <div class="footerText"> Team Ganymede - HNGi6 &copy; 2019.  <a href="#"><i class="fa fa-angle-double-up fa-2x"></i></a></div>
+                
+               
+            </footer>
+         
 
-
-
-
-<footer class="footer">
-    <div class="footerText"> Team Ganymede - HNGi6 &copy; 2019.  <a href="#"><i class="fa fa-angle-double-up fa-2x"></i></a></div>
-
-
-</footer>
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="app.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="newjs.js"></script>
-<script src="terms.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="newjs.js"></script>
+    <script src="terms.js"></script>
 </body>
 </html>
-

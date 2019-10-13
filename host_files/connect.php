@@ -1,8 +1,8 @@
 <?php
 //database connection
-$db_host = "localhost";
-$db_user = "ganymede";
-$db_password = "ganymede2019";
+$db_host = "34.230.41.202";
+$db_user = "ubuntu";
+$db_password = "6yt5^YT%";
 $db_name = "ganymede_budget_app";
 
 

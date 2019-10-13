@@ -23,7 +23,7 @@ if(isset($_POST["login"])) {
 					if (password_verify($password, $user['password_hash'])) {
 						$_SESSION['email'] = $user['email'];
 						$_SESSION['mgs'] = 'You are logged in';
-						header("Location: userpage.php");
+						header("location: userpage.php");
 					}else {
 						$errors['login-error'] = 'invalid credential';
 					}

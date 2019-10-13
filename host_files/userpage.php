@@ -5,7 +5,7 @@ ob_start();
 
 include 'connect.php';
 if (!$_SESSION['email']) {
-    header('LOCATION: index.html');
+    header('LOCATION: userpage.php');
 }
 
 $email = $_SESSION['email'];
